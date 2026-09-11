@@ -2,6 +2,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import { schemaV2Consolidated } from './schema-v2-consolidated';
 import { homeworkAssignmentsSchema } from './schema-homework-assignments';
+import { syncSchema } from './schema-sync';
 import { gradebookLessonPermsSchema } from './schema-gradebook-lesson-perms';
 
 let db: Database.Database;
@@ -35,6 +36,7 @@ export function initializeDatabase(): void {
 
   database.exec(schemaV2Consolidated);
   database.exec(homeworkAssignmentsSchema);
+  database.exec(syncSchema);
   database.exec(gradebookLessonPermsSchema);
   migrateInstitutionBranding(database);
   backfillUserRoles(database);
