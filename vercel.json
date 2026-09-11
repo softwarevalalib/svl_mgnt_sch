@@ -1,13 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "installCommand": "cd frontend && npm install --legacy-peer-deps",
-  "buildCommand": "cd frontend && npm run build",
+  "installCommand": "npm install --include=dev && cd frontend && npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://svl-sms-backend.onrender.com/api/:path*"
+      "destination": "/api/index"
     },
     {
       "source": "/((?!assets/).*)",
