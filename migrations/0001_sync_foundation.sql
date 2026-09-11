@@ -44,7 +44,7 @@ CREATE INDEX IF NOT EXISTS idx_sync_changes_pull
 
 CREATE TABLE IF NOT EXISTS sync_conflicts (
   id UUID PRIMARY KEY,
-  change_id UUID NOT NULL,
+  change_id UUID NOT NULL UNIQUE,
   institution_id UUID NOT NULL,
   device_id UUID NOT NULL,
   entity_type TEXT NOT NULL,
