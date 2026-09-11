@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
+import { cloudAuthRouter } from './auth-router';
 import { cloudSyncRouter } from './sync-router';
 import { query } from './postgres';
 
@@ -31,12 +32,22 @@ cloudApp.get('/api/health', async (_req, res) => {
   }
 });
 
+cloudApp.use('/api/auth', cloudAuthRouter);
 cloudApp.use('/api/sync', cloudSyncRouter);
 
 cloudApp.use('/api', (_req, res) => {
   res.status(501).json({
     error: 'Cloud module migration in progress',
-    available: ['/api/health', '/api/sync/devices', '/api/sync/push', '/api/sync/pull'],
+    available: [
+      '/api/health',
+      '/api/auth/branding',
+      '/api/auth/login',
+      '/api/auth/me',
+      '/api/auth/logout',
+      '/api/sync/devices',
+      '/api/sync/push',
+      '/api/sync/pull',
+    ],
   });
 });
 
